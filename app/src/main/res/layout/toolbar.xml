@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#1B4B65">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="59dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+
+            android:src="@drawable/baseline_menu_24" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
+            android:text="FoodIsLife"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </RelativeLayout>
+</RelativeLayout>

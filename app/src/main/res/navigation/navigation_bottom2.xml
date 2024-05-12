@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bottom"
+    app:startDestination="@id/allRecipes">
+    <fragment
+        android:id="@+id/allRecipes"
+        android:name="com.example.myapplication.allRecipes"
+        android:label="fragment_all_recipes"
+        tools:layout="@layout/fragment_all_recipes" />
+    <fragment
+        android:id="@+id/detailsRecipeVisistor"
+        android:name="com.example.myapplication.detailsRecipeVisistor"
+        android:label="fragment_details_recipe_visistor"
+        tools:layout="@layout/fragment_details_recipe_visistor" />
+</navigation>

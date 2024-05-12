@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bottom"
+    app:startDestination="@id/homeChefFragment">
+
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.example.myapplication.addRecipeFragment"
+        android:label="fragment_add_recipe"
+        tools:layout="@layout/fragment_add_recipe" />
+    <fragment
+        android:id="@+id/homeChefFragment"
+        android:name="com.example.myapplication.homeChefFragment"
+        android:label="fragment_home_chef"
+        tools:layout="@layout/fragment_home_chef" />
+
+
+</navigation>

@@ -1,0 +1,107 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".addRecipeFragment">
+
+    <!-- Include your toolbar layout -->
+    <include layout="@layout/toolbar"/>
+
+    <!-- EditText for Recipe Name -->
+    <EditText
+        android:id="@+id/editTextRecipeName"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Recipe Name"
+        android:inputType="text"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#A9A9A9"
+        android:textSize="16sp" />
+
+    <!-- ScrollView for Ingredients -->
+
+
+        <!-- EditText for Ingredients -->
+    <EditText
+        android:id="@+id/editTextIngredients"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Ingredients"
+        android:layout_marginLeft="5dp"
+        android:maxLines="5"
+        android:minLines="3"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
+
+
+
+    <!-- ScrollView for Instructions -->
+
+    <!-- ImageView for Recipe Image -->
+
+    <!-- Button to Add Recipe -->
+
+
+
+        <!-- EditText for Instructions -->
+    <EditText
+        android:id="@+id/editTextInstructions"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Instructions"
+        android:maxLines="5"
+        android:minLines="3"
+        android:padding="8dp"
+
+        android:scrollbars="vertical" />
+
+
+
+    <Button
+        android:id="@+id/buttonAddRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="475dp"
+        android:layout_marginLeft="135dp"
+        android:backgroundTint="#1B4B65"
+        android:padding="8dp"
+        android:text="Add Recipe" />
+
+    <!-- Button to add Ingredient -->
+    <Button
+        android:id="@+id/buttonAddIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextRecipeName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="140dp"
+        android:text="+ Add Ingredient"
+        android:textColorLink="#FFFFFF"
+        android:backgroundTint="#1B4B65"/>
+
+    <!-- Button to add Instruction -->
+    <Button
+        android:id="@+id/buttonAddInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextIngredients"
+        android:layout_marginTop="305dp"
+        android:layout_marginLeft="10dp"
+        android:text="+ Add Instruction"
+        android:backgroundTint="#1B4B65"/>
+
+</FrameLayout>
