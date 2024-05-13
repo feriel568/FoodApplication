@@ -58,6 +58,8 @@ public class SignUpActivity extends AppCompatActivity {
         chefRbtn = findViewById(R.id.chefRbtn);
         userRbtn = findViewById(R.id.userRbtn);
 
+
+        //Navigate to sign in activity
         haveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +73,11 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
+
+
                 String  email, username, password, confirmPassword;
+
+                //Récupérer les données saisies par l'utilisateur
                 email = String.valueOf(editTextEmail.getText());
                 username = String.valueOf(editTextUsername.getText());
                 password = String.valueOf(editTextPassword.getText());
@@ -87,6 +93,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                //Récupérer type utilisateur
                 String userType;
                 if (chefRbtn.isChecked()) {
                     userType = "Chef";
@@ -96,6 +104,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "Please select user type", Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                //méthode de firebase -> crée un utilisateur à partir d'un email et un mdp
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -103,11 +113,12 @@ public class SignUpActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
 
                                 if (task.isSuccessful()) {
+                                    //Récupérer l'utilisateur connecté
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     if (user != null) {
                                         // Create a new user document in Firestore
-                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                        DocumentReference userRef = db.collection("users").document(user.getUid());
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance(); // Initialiser une instance de firestore
+                                        DocumentReference userRef = db.collection("users").document(user.getUid());//Création d'un document avec un identifiant unique dans la collection users
 
                                         // Create a user object with the information to be stored
                                         Map<String, Object> userInfo = new HashMap<>();
@@ -116,6 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         userInfo.put("userType", userType);
 
                                         // Set the user document in Firestore
+                                        //Enregistrer les infos de l'utilisateur dans le document
                                         userRef.set(userInfo)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override

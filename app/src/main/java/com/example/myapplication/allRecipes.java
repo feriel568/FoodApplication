@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,8 +104,6 @@ public class allRecipes extends Fragment {
                 if (recipe != null) {
                     // Set the recipe name
                     textView.setText(recipe.getRecipeName());
-                    // You can set the image here if you have one associated with the recipe
-                    // For now, we'll just set a placeholder image
                     imageView.setImageResource(R.drawable.restaurant);
                 }
 
