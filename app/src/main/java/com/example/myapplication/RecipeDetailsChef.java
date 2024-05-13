@@ -37,8 +37,8 @@ public class RecipeDetailsChef extends AppCompatActivity {
                 // Handle menu item clicks here
                 if (item.getItemId() == R.id.nav_edit_profile) {
                     // Display a toast for Edit Profile
-                    Toast.makeText(RecipeDetailsChef.this, "Edit Profile Clicked", Toast.LENGTH_SHORT).show();
-                    return true;
+                    Intent intent = new Intent(this, editProfileChef.class);
+                    startActivity(intent);                    return true;
                 } else if (item.getItemId() == R.id.nav_logout) {
                     // Display a toast for Logout
                     logout();
