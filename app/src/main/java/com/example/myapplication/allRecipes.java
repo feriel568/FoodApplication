@@ -1,10 +1,12 @@
 package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,12 +27,12 @@ public class allRecipes extends Fragment {
 
     private ListView listViewRecipes;
     private FirebaseFirestore db;
-    private List<Recipe> recipeList; // Adjusted data structure
+    private List<Recipe> recipeList;
+    private ArrayAdapter<Recipe> adapter; // Add adapter as a class member
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_recipes, container, false);
     }
 
@@ -49,7 +52,7 @@ public class allRecipes extends Fragment {
         // Retrieve recipes from Firestore
         retrieveRecipes();
 
-        // Inside onViewCreated method after setting the adapter
+        // Set the item click listener
         listViewRecipes.setOnItemClickListener((parent, view1, position, id) -> {
             // Retrieve the selected recipe
             Recipe selectedRecipe = recipeList.get(position);
@@ -61,6 +64,54 @@ public class allRecipes extends Fragment {
             startActivity(intent);
         });
 
+        // Find the search icon and add OnClickListener
+        ImageView searchIcon = view.findViewById(R.id.searchIcon);
+        searchIcon.setOnClickListener(v -> {
+            // Implement your search functionality here
+            showSearchDialog();
+        });
+    }
+
+    // Method to show a search dialog
+    private void showSearchDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Search Recipe");
+        // Set up the input
+        final EditText input = new EditText(requireContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("Search", (dialog, which) -> {
+            String searchText = input.getText().toString().trim();
+            searchRecipe(searchText);
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+    }
+
+    // Method to search for recipes based on the user's input query
+    private void searchRecipe(String searchText) {
+        List<Recipe> searchResults = new ArrayList<>();
+        for (Recipe recipe : recipeList) {
+            if (recipe.getRecipeName().toLowerCase().contains(searchText.toLowerCase())) {
+                searchResults.add(recipe);
+            }
+        }
+        if (!searchResults.isEmpty()) {
+            // If there are search results, update the list view with the search results
+            updateListView(searchResults);
+        } else {
+            Toast.makeText(getContext(), "No matching recipes found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Method to update the list view with search results
+    private void updateListView(List<Recipe> searchResults) {
+        adapter.clear();
+        adapter.addAll(searchResults);
+        adapter.notifyDataSetChanged();
     }
 
     // Method to retrieve recipes from Firestore
@@ -84,11 +135,9 @@ public class allRecipes extends Fragment {
                 });
     }
 
-
-
     // Method to populate list view with recipe names
     private void populateListView() {
-        ArrayAdapter<Recipe> adapter = new ArrayAdapter<Recipe>(getContext(), R.layout.list_item_recipe, recipeList) {
+        adapter = new ArrayAdapter<Recipe>(getContext(), R.layout.list_item_recipe, recipeList) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

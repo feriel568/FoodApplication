@@ -9,7 +9,13 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="59dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
 
+            android:src="@drawable/baseline_search_24" />
 
         <TextView
             android:id="@+id/textView2"
