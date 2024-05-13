@@ -67,7 +67,6 @@ public class allRecipes extends Fragment {
         // Find the search icon and add OnClickListener
         ImageView searchIcon = view.findViewById(R.id.searchIcon);
         searchIcon.setOnClickListener(v -> {
-            // Implement your search functionality here
             showSearchDialog();
         });
     }
@@ -100,7 +99,6 @@ public class allRecipes extends Fragment {
             }
         }
         if (!searchResults.isEmpty()) {
-            // If there are search results, update the list view with the search results
             updateListView(searchResults);
         } else {
             Toast.makeText(getContext(), "No matching recipes found", Toast.LENGTH_SHORT).show();
